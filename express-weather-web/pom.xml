@@ -3,9 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.exp</groupId>
-		<artifactId>express-pro</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<artifactId>express-weather-web</artifactId>
 	<packaging>war</packaging>
@@ -39,7 +40,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
-
 	<!-- <build> <plugins> <plugin> <groupId>org.springframework.boot</groupId> 
 		<artifactId>spring-boot-maven-plugin</artifactId> </plugin> </plugins> </build> -->
 </project>
