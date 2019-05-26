@@ -7,23 +7,11 @@
 		<artifactId>express-pro</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>express-weather-impl</artifactId>
+	<artifactId>express-weather-ws-composite</artifactId>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.exp</groupId>
-			<artifactId>express-weather-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>	
-
-	</dependencies>
 </project>
