@@ -15,7 +15,7 @@ import com.weatherexpress.entity.Users;
 
 @Component
 public interface UsersDAO {
-	
+	public Users getUserByUserName(String userName);
 	public Set<Users> getUsers();
 	public Users saveUser(Users user);
 	public Users deleteUser(Users user);
