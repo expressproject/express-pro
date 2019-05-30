@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AuthenticationWebController {
 
+	@RequestMapping(value = "/")
+	public String defaultPage() {
+		return "welcome";
+	}
+
 	@RequestMapping(value = "/welcome")
 	public String welcomePage() {
 		return "welcome";

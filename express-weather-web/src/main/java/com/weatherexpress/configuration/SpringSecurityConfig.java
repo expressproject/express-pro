@@ -21,7 +21,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/welcome").permitAll().and().logout().logoutSuccessUrl("/logout")
+				.defaultSuccessUrl("/").permitAll().and().logout().logoutSuccessUrl("/logout")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll();
 
 		// http.csrf().disable();
