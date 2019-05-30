@@ -34,10 +34,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/registerUser");
 		web.ignoring().antMatchers("/welcome/**");
+		web.ignoring().antMatchers("/userRegistration");
 		web.ignoring().antMatchers("/resources/**");
 		web.ignoring().antMatchers("/*.css");
 		web.ignoring().antMatchers("/*.js");
+
 	}
 
 }

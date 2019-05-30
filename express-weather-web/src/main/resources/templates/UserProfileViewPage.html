@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Welcom</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p th:text="${messages}"></p>
+	<div th:if="${update}">
+		<h1 th:text="'Hello ' +  ${user.firstName} + ' ' + ${user.lastName}"></h1>
+		<h3>Thank you for Registration</h3>
+		<h3>Details Updated</h3>
+	</div>
+	<div th:if="${view}">
+		<h3>Profile Detail</h3>
+		<h1 th:text="'Hello ' +  ${user.firstName} + ' ' + ${user.lastName}"></h1>
+		<h4>Address detail</h4>
+		<h1 th:text="'AddressLine1' + ' : ' + ${user.addressLine1}"></h1>
+		<h1 th:text="'AddressLine2' + ' : ' + ${user.addressLine2}"></h1>
+		<h1 th:text="'City' + ' : ' + ${user.city}"></h1>
+		<h1 th:text="'Country' + ' : ' + ${user.country}"></h1>
+		<h1 th:text="'State' + ' : ' + ${user.state}"></h1>
+	</div>
+	<p>
+		<a th:href="@{/viewProfile/${user.userName}}">View Your Profile</a>
+	</p>
+	<p>
+		<a th:href="@{/editProfile/${user.userName}}">Edit Your Profile</a>
+	</p>
+</body>
+</html>
