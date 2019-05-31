@@ -79,14 +79,15 @@ public class AuthenticationWebController {
 		return "userRegistrationPage";
 	}
 
-	@GetMapping("/viewProfile/{userName}")
-	public String viewProfile(@PathVariable("userName") String userName, Model model) {
-
-		Users user = usersUtil.getUsersByUserName("ravikumar");
+	@GetMapping("/viewProfile")
+	public String viewProfile(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Users user = usersUtil.getUsersByUserName(auth.getName());
 		if (user != null) {
 			UserRegistrationDto userdto = new UserRegistrationDto();
 			userdto.setFirstName(user.getFirstName());
 			userdto.setLastName(user.getLastName());
+			userdto.setUserName(user.getUserName());
 			model.addAttribute("view", true);
 			model.addAttribute("messages", "Your Profile ");
 			model.addAttribute("user", userdto);
@@ -96,12 +97,14 @@ public class AuthenticationWebController {
 		return "UserProfileViewPage";
 	}
 
-	@GetMapping("/editProfile/{userName}")
-	public String editProfile(@ModelAttribute("userProfile") UserRegistrationDto user,
-			@PathVariable("userName") String userName, Model model) {
-		Users existuser = usersUtil.getUsersByUserName("ravikumar");
+	@GetMapping("/editProfile")
+	public String editProfile(@ModelAttribute("userProfile") UserRegistrationDto user, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Users existuser = usersUtil.getUsersByUserName(auth.getName());
 		user.setFirstName(existuser.getFirstName());
 		user.setLastName(existuser.getLastName());
+		user.setUserName(existuser.getUserName());
+		user.setPassword(existuser.getPassword());
 		return "userRegistrationPageEdit";
 	}
 }

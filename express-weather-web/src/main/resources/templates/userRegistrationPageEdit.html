@@ -23,7 +23,7 @@
             <p>Last Name*: <input type="text" value="${lastName}" th:field="*{lastName}" th:required="required"/></p>
              <p>Password*: <input type="text" value="${password}" th:field="*{password}" th:required="required"/></p>
             <p>UserName*:
-                <input type="text" value="${firstName}" th:field="*{userName}" th:required="required"/>
+                <input type="text" value="${userName}" th:field="*{userName}" th:required="required"/>
                 <span class="red" th:if="${#fields.hasErrors('userName')}">UserName is invalid!</span>
             </p>
             <p>Address:</p>
