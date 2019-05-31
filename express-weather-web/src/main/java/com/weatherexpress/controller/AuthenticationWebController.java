@@ -67,11 +67,12 @@ public class AuthenticationWebController {
 	}
 
 	@PostMapping("/registerUser")
-	public String personSubmit(@ModelAttribute("user") UserRegistrationDto user, Model model,
+	public String personSubmit(@ModelAttribute("userProfile") UserRegistrationDto user, Model model,
 			BindingResult bindingResult) throws IOException {
 		// save the user
 		System.out.println(user);
 		if (!bindingResult.hasErrors()) {
+			model.addAttribute("user", user);
 			model.addAttribute("update", true);
 			return "UserProfileViewPage";
 		}
@@ -87,11 +88,20 @@ public class AuthenticationWebController {
 			userdto.setFirstName(user.getFirstName());
 			userdto.setLastName(user.getLastName());
 			model.addAttribute("view", true);
-			model.addAttribute("message", "Your Profile ");
+			model.addAttribute("messages", "Your Profile ");
 			model.addAttribute("user", userdto);
 		} else {
 			model.addAttribute("message", "No User");
 		}
 		return "UserProfileViewPage";
+	}
+
+	@GetMapping("/editProfile/{userName}")
+	public String editProfile(@ModelAttribute("userProfile") UserRegistrationDto user,
+			@PathVariable("userName") String userName, Model model) {
+		Users existuser = usersUtil.getUsersByUserName("ravikumar");
+		user.setFirstName(existuser.getFirstName());
+		user.setLastName(existuser.getLastName());
+		return "userRegistrationPageEdit";
 	}
 }

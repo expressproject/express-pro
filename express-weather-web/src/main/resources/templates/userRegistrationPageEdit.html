@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Form Edit</title>
+    <title>USER REGISTRATION FORM</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
@@ -14,24 +14,26 @@
     }
 </style>
 <body>
-<h1>Edit Person Details</h1>
+<h1>USER</h1>
 <div class="container-fluid">
     <div class="cloumn">
-        <form action="#" th:action="@{/form}" th:object="${person}" th:method="put">
+        <form action="#" th:action="@{/registerUser}" th:object="${userProfile}" method="post">
+
             <p>First Name*: <input type="text" value="${firstName}" th:field="*{firstName}" th:required="required"/></p>
             <p>Last Name*: <input type="text" value="${lastName}" th:field="*{lastName}" th:required="required"/></p>
-
-            <p>Age*:
-                <input type="text" value="${age}" th:field="*{age}" th:required="required"/>
-                <span class="red" th:if="${#fields.hasErrors('age')}">Age value is invalid!</span>
+             <p>Password*: <input type="text" value="${password}" th:field="*{password}" th:required="required"/></p>
+            <p>UserName*:
+                <input type="text" value="${firstName}" th:field="*{userName}" th:required="required"/>
+                <span class="red" th:if="${#fields.hasErrors('userName')}">UserName is invalid!</span>
             </p>
             <p>Address:</p>
-            <p>Road Name: <input type="text" value="${address.roadName}" th:field="*{address.roadName}"/></p>
-            <p>City: <input type="text" value="${address.city}" th:field="*{address.city}"/></p>
-            <p>Country: <input type="text" value="${address.country}" th:field="*{address.country}"/></p>
-            <p>PinCode: <input type="number" value="${address.pincode}" th:field="*{address.pinCode}"/></p>
-            <p><input type="submit" th:value="Submit" class="btn btn-primary"/>
-                <input type="reset" name="Reset" th:value="Reset"/></p>
+            <p>AddressLine1: <input type="text" value="${addressLine1}" th:field="*{addressLine1}"/></p>
+            <p>AddressLine2: <input type="text" value="${addressLine2}" th:field="*{addressLine2}"/></p>
+            <p>City: <input type="text" value="${city}" th:field="*{city}"/></p>
+            <p>Country: <input type="text" value="${country}" th:field="*{country}"/></p>
+            <p>State: <input type="text" value="${state}" th:field="*{state}"/></p>
+            <p><input type="submit" value="Submit" class="btn btn-primary"/>
+                <input type="reset" value="Reset" class="btn btn-secondary"/></p>
         </form>
     </div>
 </div>
