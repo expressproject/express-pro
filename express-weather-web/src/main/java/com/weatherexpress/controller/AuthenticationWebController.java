@@ -70,6 +70,7 @@ public class AuthenticationWebController {
 	public String personSubmit(@ModelAttribute("userProfile") UserRegistrationDto user, Model model,
 			BindingResult bindingResult) throws IOException {
 		// save the user
+		usersUtil.saveUserProfile(user);
 		System.out.println(user);
 		if (!bindingResult.hasErrors()) {
 			model.addAttribute("user", user);

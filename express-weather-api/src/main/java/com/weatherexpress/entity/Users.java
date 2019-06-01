@@ -1,8 +1,7 @@
 package com.weatherexpress.entity;
 
-
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,44 +16,43 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class Users {
-	
+
 	public Users() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int id;
-	
+
 	@Column(name = "User_first_name")
 	private String firstName;
-	
+
 	@Column(name = "User_last_name")
 	private String lastName;
-	
+
 	@Column(name = "username")
 	private String userName;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "effective_date")
-	private Date effectiveDate;
-	
+	private Timestamp effectiveDate;
+
 	@Column(name = "expire_date")
-	private Date expiryDate;
-	
+	private Timestamp expiryDate;
+
 	@Column(name = "active_status")
 	private String isDeleted;
-	
-	@OneToMany(mappedBy = "users" , cascade = {CascadeType.ALL}
-	)
+
+	@OneToMany(mappedBy = "users", cascade = { CascadeType.ALL })
 	private List<InteractionChannel> interactionChannels = new ArrayList<InteractionChannel>();
 
-	@OneToMany(mappedBy = "users", cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "users", cascade = { CascadeType.ALL })
 	private List<Address> address = new ArrayList<Address>();;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -95,19 +93,19 @@ public class Users {
 		this.password = password;
 	}
 
-	public Date getEffectiveDate() {
+	public Timestamp getEffectiveDate() {
 		return effectiveDate;
 	}
 
-	public void setEffectiveDate(Date effectiveDate) {
+	public void setEffectiveDate(Timestamp effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
-	public Date getExpiryDate() {
+	public Timestamp getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(Timestamp expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 
@@ -141,10 +139,5 @@ public class Users {
 	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
-	
-	
-	
-	
-	
 
 }

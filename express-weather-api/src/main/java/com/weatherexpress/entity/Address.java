@@ -1,6 +1,5 @@
 package com.weatherexpress.entity;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,38 +11,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_address",schema = "whether_express")
+@Table(name = "user_address", schema = "whether_express")
 public class Address {
-	//add_id, user_id, addressline_1, addressline_2, city, state, country
+	// add_id, user_id, addressline_1, addressline_2, city, state, country
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "add_id")
 	private int addressId;
-	
+
 	@Column(name = "addressline_1")
 	private String addressLine1;
-	
+
 	@Column(name = "addressline_2")
 	private String addressLine2;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "state")
 	private String state;
-	
+
 	@Column(name = "country")
 	private String country;
-	
-	//CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH
-	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "user_id")
-    private Users users = new Users();
-	
+
+	// CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private Users users;
+
 	public int getAddressId() {
 		return addressId;
 	}
@@ -105,10 +104,5 @@ public class Address {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
-	
-	
-	
-	
-	
 
 }

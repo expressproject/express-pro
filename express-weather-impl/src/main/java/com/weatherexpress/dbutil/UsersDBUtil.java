@@ -49,11 +49,11 @@ public class UsersDBUtil implements UsersDAO {
 
 	@Override
 	public Users saveUser(Users user) {
-
-		/*
-		 * Session session = entityManager.unwrap(Session.class);
-		 * session.saveOrUpdate(user);
-		 */
+		userRepositoryDao.save(user);
+		
+		/*  Session session = entityManager.unwrap(Session.class);
+		  session.saveOrUpdate(user);*/
+		 
 		return user;
 	}
 
