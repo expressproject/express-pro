@@ -7,18 +7,26 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.weatherexpress.dao.AddressRepositoryDao;
+import com.weatherexpress.dao.InteractionChannelRepositoryDao;
 import com.weatherexpress.dao.UserRepositoryDao;
 import com.weatherexpress.dao.UsersDAO;
+import com.weatherexpress.entity.Address;
+import com.weatherexpress.entity.InteractionChannel;
 import com.weatherexpress.entity.Users;
 
 @Repository
 public class UsersDBUtil implements UsersDAO {
 	@Autowired
 	private UserRepositoryDao userRepositoryDao;
+	@Autowired
+	InteractionChannelRepositoryDao interactionChannelRepositoryDao;
+	@Autowired
+	AddressRepositoryDao addressRepositoryDao;
+
 	private EntityManager entityManager;
 
 	@Autowired
@@ -50,10 +58,12 @@ public class UsersDBUtil implements UsersDAO {
 	@Override
 	public Users saveUser(Users user) {
 		userRepositoryDao.save(user);
-		
-		/*  Session session = entityManager.unwrap(Session.class);
-		  session.saveOrUpdate(user);*/
-		 
+
+		/*
+		 * Session session = entityManager.unwrap(Session.class);
+		 * session.saveOrUpdate(user);
+		 */
+
 		return user;
 	}
 
@@ -73,6 +83,18 @@ public class UsersDBUtil implements UsersDAO {
 	public Users getUserByUserName(String userName) {
 		Users singleUser = userRepositoryDao.findByUserName(userName);
 		return singleUser;
+	}
+
+	@Override
+	public Address saveAddress(Address address) {
+		addressRepositoryDao.save(address);
+		return null;
+	}
+
+	@Override
+	public InteractionChannel saveInteractionChannel(InteractionChannel interactionChannel) {
+		interactionChannelRepositoryDao.save(interactionChannel);
+		return null;
 	}
 
 }
