@@ -12,9 +12,11 @@ public interface UsersUtil {
 
 	public Set<Users> getUsers();
 
-	public Users getUsersByUserName(String userName);
+	public UserRegistrationDto getUsersByUserName(String userName);
 
 	public Users save(Users user);
 
 	public UserRegistrationDto saveUserProfile(UserRegistrationDto userProfile);
+
+	public UserRegistrationDto updateUserProfile(UserRegistrationDto userProfile);
 }

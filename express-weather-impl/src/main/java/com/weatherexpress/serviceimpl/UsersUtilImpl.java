@@ -47,9 +47,22 @@ public class UsersUtilImpl implements UsersUtil {
 	}
 
 	@Override
-	public Users getUsersByUserName(String userName) {
+	public UserRegistrationDto getUsersByUserName(String userName) {
 		Users user = userRepositoryDao.findByUserName(userName);
-		return user;
+		UserRegistrationDto userdto = new UserRegistrationDto();
+		userdto.setFirstName(user.getFirstName());
+		userdto.setLastName(user.getLastName());
+		userdto.setUserName(user.getUserName());
+		userdto.setAddressLine1(user.getAddress().get(0).getAddressLine1());
+		userdto.setAddressLine2(user.getAddress().get(0).getAddressLine2());
+		userdto.setPassword(user.getPassword());
+		userdto.setCity(user.getAddress().get(0).getCity());
+		userdto.setCountry(user.getAddress().get(0).getCountry());
+		userdto.setEmail(user.getInteractionChannels().get(0).getEmail());
+		userdto.setState(user.getAddress().get(0).getState());
+		userdto.setWebsite(user.getInteractionChannels().get(0).getWebsite());
+		userdto.setPhoneNumber(String.valueOf(user.getInteractionChannels().get(0).getPhoneNumber()));
+		return userdto;
 	}
 
 	@Transactional
@@ -77,6 +90,43 @@ public class UsersUtilImpl implements UsersUtil {
 		usersDAO.saveAddress(address);
 
 		InteractionChannel intrach = new InteractionChannel();
+		intrach.setEmail(userProfile.getEmail());
+		intrach.setPhoneNumber(Long.parseLong(userProfile.getPhoneNumber()));
+		intrach.setWebsite(userProfile.getWebsite());
+		usersDAO.saveInteractionChannel(intrach);
+
+		intrach.setUsers(user);
+		address.setUsers(user);
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public UserRegistrationDto updateUserProfile(UserRegistrationDto userProfile) {
+
+		Users user = userRepositoryDao.findByUserName(userProfile.getUserName());
+		user.setFirstName(userProfile.getFirstName());
+		user.setLastName(userProfile.getLastName());
+		Calendar cd = Calendar.getInstance();
+		Timestamp timestamp = new Timestamp(cd.getTimeInMillis());
+		user.setEffectiveDate(timestamp);
+		user.setUserName(userProfile.getUserName());
+		user.setPassword(userProfile.getPassword());
+		user.setExpiryDate(timestamp);
+		user.setIsDeleted("Y");
+		usersDAO.saveUser(user);
+
+		Address address = new Address();
+		address.setAddressId(user.getAddress().get(0).getAddressId());
+		address.setAddressLine1(userProfile.getAddressLine1());
+		address.setAddressLine2(userProfile.getAddressLine2());
+		address.setCity(userProfile.getCity());
+		address.setCountry(userProfile.getCountry());
+		address.setState(userProfile.getState());
+		usersDAO.saveAddress(address);
+
+		InteractionChannel intrach = new InteractionChannel();
+		intrach.setUserInteractionChannelId(user.getInteractionChannels().get(0).getUserInteractionChannelId());
 		intrach.setEmail(userProfile.getEmail());
 		intrach.setPhoneNumber(Long.parseLong(userProfile.getPhoneNumber()));
 		intrach.setWebsite(userProfile.getWebsite());

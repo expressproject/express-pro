@@ -6,9 +6,12 @@
 </head>
 <body>
 	<p th:text="${messages}"></p>
-	<div th:if="${update}">
+	<div th:if="${register}">
 		<h1 th:text="'Hello ' +  ${user.firstName} + ' ' + ${user.lastName}"></h1>
 		<h3>Thank you for Registration</h3>
+	</div>
+	<div th:if="${update}">
+		<h1 th:text="'Hello ' +  ${user.firstName} + ' ' + ${user.lastName}"></h1>
 		<h3>Details Updated</h3>
 	</div>
 	<div th:if="${view}">

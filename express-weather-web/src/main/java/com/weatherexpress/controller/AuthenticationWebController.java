@@ -67,14 +67,12 @@ public class AuthenticationWebController {
 	}
 
 	@PostMapping("/registerUser")
-	public String personSubmit(@ModelAttribute("userProfile") UserRegistrationDto user, Model model,
+	public String registerUserProfile(@ModelAttribute("userProfile") UserRegistrationDto user, Model model,
 			BindingResult bindingResult) throws IOException {
-		// save the user
 		usersUtil.saveUserProfile(user);
-		System.out.println(user);
 		if (!bindingResult.hasErrors()) {
 			model.addAttribute("user", user);
-			model.addAttribute("update", true);
+			model.addAttribute("register", true);
 			return "UserProfileViewPage";
 		}
 		return "userRegistrationPage";
@@ -83,12 +81,8 @@ public class AuthenticationWebController {
 	@GetMapping("/viewProfile")
 	public String viewProfile(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Users user = usersUtil.getUsersByUserName(auth.getName());
-		if (user != null) {
-			UserRegistrationDto userdto = new UserRegistrationDto();
-			userdto.setFirstName(user.getFirstName());
-			userdto.setLastName(user.getLastName());
-			userdto.setUserName(user.getUserName());
+		UserRegistrationDto userdto = usersUtil.getUsersByUserName(auth.getName());
+		if (userdto != null) {
 			model.addAttribute("view", true);
 			model.addAttribute("messages", "Your Profile ");
 			model.addAttribute("user", userdto);
@@ -101,11 +95,22 @@ public class AuthenticationWebController {
 	@GetMapping("/editProfile")
 	public String editProfile(@ModelAttribute("userProfile") UserRegistrationDto user, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Users existuser = usersUtil.getUsersByUserName(auth.getName());
-		user.setFirstName(existuser.getFirstName());
-		user.setLastName(existuser.getLastName());
-		user.setUserName(existuser.getUserName());
-		user.setPassword(existuser.getPassword());
+		UserRegistrationDto userdto = usersUtil.getUsersByUserName(auth.getName());
+		model.addAttribute("messages", "Edit Your Profile ");
+		model.addAttribute("userProfile", userdto);
 		return "userRegistrationPageEdit";
+	}
+
+	@PostMapping("/updateProfile")
+	public String updateUserProfile(@ModelAttribute("userProfile") UserRegistrationDto user, Model model,
+			BindingResult bindingResult) throws IOException {
+
+		usersUtil.updateUserProfile(user);
+		if (!bindingResult.hasErrors()) {
+			model.addAttribute("user", user);
+			model.addAttribute("update", true);
+			return "UserProfileViewPage";
+		}
+		return "userRegistrationPage";
 	}
 }

@@ -16,8 +16,9 @@
 <body>
 <h1>USER</h1>
 <div class="container-fluid">
+<p th:text="${messages}"></p>
     <div class="cloumn">
-        <form action="#" th:action="@{/registerUser}" th:object="${userProfile}" method="post">
+        <form action="#" th:action="@{/updateProfile}" th:object="${userProfile}" method="post">
 
             <p>First Name*: <input type="text" value="${firstName}" th:field="*{firstName}" th:required="required"/></p>
             <p>Last Name*: <input type="text" value="${lastName}" th:field="*{lastName}" th:required="required"/></p>
@@ -36,7 +37,7 @@
             <p>Email: <input type="text" value="${email}" th:field="*{email}"/></p>
             <p>Phone Number: <input type="text" value="${phoneNumber}" th:field="*{phoneNumber}"/></p>
             <p>WebSite: <input type="text" value="${website}" th:field="*{website}"/></p>
-            <p><input type="submit" value="Submit" class="btn btn-primary"/>
+            <p><input type="submit" value="Update" class="btn btn-primary"/>
                 <input type="reset" value="Reset" class="btn btn-secondary"/></p>
         </form>
     </div>
