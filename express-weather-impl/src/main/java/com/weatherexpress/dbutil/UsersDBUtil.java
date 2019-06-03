@@ -99,12 +99,12 @@ public class UsersDBUtil implements UsersDAO {
 
 	@Override
 	public Address getAddressByUserId(String userId) {
-		return addressRepositoryDao.findAddressByAdd_id(userId);
+		return addressRepositoryDao.findAddressByAddressId(userId);
 	}
 
 	@Override
 	public InteractionChannel getInteractionChannelByUserId(String userId) {
-		return interactionChannelRepositoryDao.findInteractionChannelByUic_id(userId);
+		return interactionChannelRepositoryDao.findInteractionChannelByUserInteractionChannelId(userId);
 	}
 
 }
