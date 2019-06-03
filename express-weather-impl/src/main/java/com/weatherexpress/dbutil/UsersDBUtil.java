@@ -97,4 +97,14 @@ public class UsersDBUtil implements UsersDAO {
 		return null;
 	}
 
+	@Override
+	public Address getAddressByUserId(String userId) {
+		return addressRepositoryDao.findAddressByAdd_id(userId);
+	}
+
+	@Override
+	public InteractionChannel getInteractionChannelByUserId(String userId) {
+		return interactionChannelRepositoryDao.findInteractionChannelByUic_id(userId);
+	}
+
 }

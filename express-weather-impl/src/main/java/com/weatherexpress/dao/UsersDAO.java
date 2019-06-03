@@ -23,7 +23,11 @@ public interface UsersDAO {
 
 	public Address saveAddress(Address address);
 
+	public Address getAddressByUserId(String userId);
+
 	public InteractionChannel saveInteractionChannel(InteractionChannel interactionChannel);
+
+	public InteractionChannel getInteractionChannelByUserId(String userId);
 
 	public Users deleteUser(Users user);
 

@@ -1,16 +1,13 @@
 package com.weatherexpress.serviceimpl;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.weatherexpress.dao.UserRepositoryDao;
 import com.weatherexpress.dao.UsersDAO;
 import com.weatherexpress.dto.UserRegistrationDto;
 import com.weatherexpress.entity.Address;
@@ -23,8 +20,6 @@ public class UsersUtilImpl implements UsersUtil {
 
 	@Autowired
 	private UsersDAO usersDAO;
-	@Autowired
-	private UserRepositoryDao userRepositoryDao;
 
 	@Override
 	@Transactional
@@ -48,7 +43,7 @@ public class UsersUtilImpl implements UsersUtil {
 
 	@Override
 	public UserRegistrationDto getUsersByUserName(String userName) {
-		Users user = userRepositoryDao.findByUserName(userName);
+		Users user = usersDAO.getUserByUserName(userName);
 		UserRegistrationDto userdto = new UserRegistrationDto();
 		userdto.setFirstName(user.getFirstName());
 		userdto.setLastName(user.getLastName());
@@ -104,7 +99,7 @@ public class UsersUtilImpl implements UsersUtil {
 	@Override
 	public UserRegistrationDto updateUserProfile(UserRegistrationDto userProfile) {
 
-		Users user = userRepositoryDao.findByUserName(userProfile.getUserName());
+		Users user = usersDAO.getUserByUserName(userProfile.getUserName());
 		user.setFirstName(userProfile.getFirstName());
 		user.setLastName(userProfile.getLastName());
 		Calendar cd = Calendar.getInstance();
@@ -116,7 +111,7 @@ public class UsersUtilImpl implements UsersUtil {
 		user.setIsDeleted("Y");
 		usersDAO.saveUser(user);
 
-		Address address = new Address();
+		Address address = usersDAO.getAddressByUserId(String.valueOf(user.getId()));
 		address.setAddressId(user.getAddress().get(0).getAddressId());
 		address.setAddressLine1(userProfile.getAddressLine1());
 		address.setAddressLine2(userProfile.getAddressLine2());
@@ -125,15 +120,13 @@ public class UsersUtilImpl implements UsersUtil {
 		address.setState(userProfile.getState());
 		usersDAO.saveAddress(address);
 
-		InteractionChannel intrach = new InteractionChannel();
+		InteractionChannel intrach = usersDAO.getInteractionChannelByUserId(String.valueOf(user.getId()));
 		intrach.setUserInteractionChannelId(user.getInteractionChannels().get(0).getUserInteractionChannelId());
 		intrach.setEmail(userProfile.getEmail());
 		intrach.setPhoneNumber(Long.parseLong(userProfile.getPhoneNumber()));
 		intrach.setWebsite(userProfile.getWebsite());
 		usersDAO.saveInteractionChannel(intrach);
 
-		intrach.setUsers(user);
-		address.setUsers(user);
 		return null;
 	}
 
