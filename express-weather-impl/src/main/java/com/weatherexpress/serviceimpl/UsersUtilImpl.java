@@ -111,7 +111,7 @@ public class UsersUtilImpl implements UsersUtil {
 			user.setIsDeleted("Y");
 			usersDAO.saveUser(user);
 
-			Address address = usersDAO.getAddressByUserId(String.valueOf(user.getId()));
+			Address address = usersDAO.getAddressByUserId(String.valueOf(user.getAddress().get(0).getAddressId()));
 			address.setAddressId(user.getAddress().get(0).getAddressId());
 			address.setAddressLine1(userProfile.getAddressLine1());
 			address.setAddressLine2(userProfile.getAddressLine2());
@@ -120,7 +120,8 @@ public class UsersUtilImpl implements UsersUtil {
 			address.setState(userProfile.getState());
 			usersDAO.saveAddress(address);
 
-			InteractionChannel intrach = usersDAO.getInteractionChannelByUserId(String.valueOf(user.getId()));
+			InteractionChannel intrach = usersDAO.getInteractionChannelByUserId(
+					String.valueOf(user.getInteractionChannels().get(0).getUserInteractionChannelId()));
 			intrach.setUserInteractionChannelId(user.getInteractionChannels().get(0).getUserInteractionChannelId());
 			intrach.setEmail(userProfile.getEmail());
 			intrach.setPhoneNumber(Long.parseLong(userProfile.getPhoneNumber()));
