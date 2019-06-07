@@ -5,8 +5,9 @@
 </head>
 <body>
 <h1>Click Name to Edit Details</h1>
-<th:block th:each="name : ${allNames}">
-    <p><a th:text="${name}" th:href="@{|edit/${name}|}"></a></p>
+<th:block th:each="name : ${userList}">
+    <p><a th:text="${name.FirstName}" th:href="@{|/admin/viewUserProfile/${name.userName}|}"></a></p>
 </th:block>
+<a th:href="@{/welcome}">Back to home page</a>
 </body>
 </html>

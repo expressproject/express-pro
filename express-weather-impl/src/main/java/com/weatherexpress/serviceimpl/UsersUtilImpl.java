@@ -2,6 +2,7 @@ package com.weatherexpress.serviceimpl;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.weatherexpress.dao.UsersDAO;
+import com.weatherexpress.dto.UserProfileDto;
 import com.weatherexpress.dto.UserRegistrationDto;
 import com.weatherexpress.entity.Address;
 import com.weatherexpress.entity.InteractionChannel;
@@ -23,13 +25,16 @@ public class UsersUtilImpl implements UsersUtil {
 
 	@Override
 	@Transactional
-	public Set<Users> getUsers() {
-
+	public Set<UserProfileDto> getUsers() {
+		Set<UserProfileDto> userList = new HashSet<UserProfileDto>();
 		Set<Users> users = usersDAO.getUsers();
-
-		// logic : don't display the inactivated users
-
-		return users;
+		for (Users user : users) {
+			UserProfileDto oneUser = new UserProfileDto();
+			oneUser.setFirstName(user.getFirstName());
+			oneUser.setUserName(user.getUserName());
+			userList.add(oneUser);
+		}
+		return userList;
 	}
 
 	@Override

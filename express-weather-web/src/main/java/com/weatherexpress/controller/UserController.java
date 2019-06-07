@@ -7,29 +7,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.weatherexpress.dto.UserProfileDto;
 import com.weatherexpress.entity.Users;
 import com.weatherexpress.service.UsersUtil;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	
+
 	@Autowired
 	private UsersUtil usersUtil;
-	
+
 	@GetMapping("/getUsers")
-	public Set<Users> getAllUsers()
-	{
-		//calling service method
-		
-		Set<Users> users = usersUtil.getUsers();
-		
-		return users;
+	public Set<UserProfileDto> getAllUsers() {
+		// calling service method
+
+		Set<UserProfileDto> userList = usersUtil.getUsers();
+
+		return userList;
 	}
-	
+
 	@GetMapping("/saveUsers")
-	public Users saveUsersInfo()
-	{
+	public Users saveUsersInfo() {
 		/*
 		 * InteractionChannel interactionChannel = new InteractionChannel();
 		 * interactionChannel.setEmail("archi@archi.com");

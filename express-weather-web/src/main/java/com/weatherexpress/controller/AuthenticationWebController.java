@@ -1,6 +1,7 @@
 package com.weatherexpress.controller;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.weatherexpress.dto.UserProfileDto;
 import com.weatherexpress.dto.UserRegistrationDto;
-import com.weatherexpress.entity.Users;
 import com.weatherexpress.service.UsersUtil;
 
 @Controller
@@ -113,4 +113,5 @@ public class AuthenticationWebController {
 		}
 		return "userRegistrationPage";
 	}
+
 }

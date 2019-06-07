@@ -4,13 +4,14 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.weatherexpress.dto.UserProfileDto;
 import com.weatherexpress.dto.UserRegistrationDto;
 import com.weatherexpress.entity.Users;
 
 @Component
 public interface UsersUtil {
 
-	public Set<Users> getUsers();
+	public Set<UserProfileDto> getUsers();
 
 	public UserRegistrationDto getUsersByUserName(String userName);
 

@@ -27,6 +27,9 @@
 		<h1 th:text="'PhoneNumber' + ' : ' + ${user.phoneNumber}"></h1>
 		<h1 th:text="'Website' + ' : ' + ${user.website}"></h1>
 	</div>
+	<div th:if="${adminView}">
+	<a th:href="@{/admin/adminPage}">Back to Admin Page</a>
+	</div>
 	<p>
 		<a th:href="@{/viewProfile}">View Your Profile</a>
 	</p>
