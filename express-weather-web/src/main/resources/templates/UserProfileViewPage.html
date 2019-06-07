@@ -23,6 +23,9 @@
 		<h1 th:text="'City' + ' : ' + ${user.city}"></h1>
 		<h1 th:text="'Country' + ' : ' + ${user.country}"></h1>
 		<h1 th:text="'State' + ' : ' + ${user.state}"></h1>
+		<h1 th:text="'Email' + ' : ' + ${user.email}"></h1>
+		<h1 th:text="'PhoneNumber' + ' : ' + ${user.phoneNumber}"></h1>
+		<h1 th:text="'Website' + ' : ' + ${user.website}"></h1>
 	</div>
 	<p>
 		<a th:href="@{/viewProfile}">View Your Profile</a>
@@ -30,5 +33,6 @@
 	<p>
 		<a th:href="@{/editProfile}">Edit Your Profile</a>
 	</p>
+	<a th:href="@{/welcome}">Back to home page</a>
 </body>
 </html>
